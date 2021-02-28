@@ -8,16 +8,34 @@ import java.util.Arrays;
  */
 public class Square {
 	
-	public MazeMap getMazeMap() { throw new RuntimeException("Not yet implemented"); }
+	private int rowIndex;
 	
-	public int getRowIndex() { throw new RuntimeException("Not yet implemented"); }
+	private int columnIndex;
 	
-	public int getColumnIndex() { throw new RuntimeException("Not yet implemented"); }
+	private MazeMap mazeMap;
 	
-	public boolean isPassable() { throw new RuntimeException("Not yet implemented"); }
+	
+	public MazeMap getMazeMap() { 
+		return mazeMap;
+	}
+	
+	public int getRowIndex() { 
+		return rowIndex;
+	}
+	
+	
+	public int getColumnIndex() { 
+		return columnIndex;
+	}
+	
+	public boolean isPassable() { 
+		return MazeMap.isPassable(rowIndex,columnIndex);
+	}
 	
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
-		throw new RuntimeException("Not yet implemented");
+		this.mazeMap = mazeMap;
+		this.rowIndex = rowIndex;
+		this.columnIndex = columnIndex;
 	}
 	
 	/**
