@@ -2,6 +2,8 @@ package pacman;
 
 import java.util.Arrays;
 
+import pacman.MazeMap;
+
 /**
  * Each instance of this class represents a position in a maze, specified by a row index and a column index.
  * The top row and the leftmost column have index 0.
@@ -13,6 +15,12 @@ public class Square {
 	private int columnIndex;
 	
 	private MazeMap mazeMap;
+	
+	private Square(MazeMap mazemap, int rowIndex, int columnIndex) {
+		this.mazeMap = mazemap;
+		this.rowIndex = rowIndex;
+		this.columnIndex = columnIndex;
+	}
 	
 	
 	public MazeMap getMazeMap() { 
@@ -29,23 +37,43 @@ public class Square {
 	}
 	
 	public boolean isPassable() { 
-		return MazeMap.isPassable(rowIndex,columnIndex);
+		return mazeMap.isPassable(rowIndex,columnIndex);
 	}
 	
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
-		this.mazeMap = mazeMap;
-		this.rowIndex = rowIndex;
-		this.columnIndex = columnIndex;
+		Square square = new Square(mazeMap, rowIndex, columnIndex);
+		return square;
 	}
 	
 	/**
 	 * Returns this square's neighbor in the given direction.
-	 * If this square has no neigbor in the given direction, return the square that is furthest away in the opposite direction.
+	 * If this square has no neighbor in the given direction, return the square that is furthest away in the opposite direction.
 	 */
 	// No formal documentation required
 	public Square getNeighbor(Direction direction) {
 		// Implementation hint: use method java.lang.Math.floorMod.
-		throw new RuntimeException("Not yet implemented");
+		if (direction == Direction.RIGHT) {
+			rowindex = rowIndex;
+			columnindex = java.lang.Math.floorMod(columnIndex + 1, mazeMap.getWidth());
+		}
+		if (direction == Direction.LEFT) {
+			rowindex = rowIndex;
+			columnindex = java.lang.Math.floorMod(columnIndex - 1, mazeMap.getWidth());
+		}
+		
+		if (direction == Direction.DOWN) {
+			rowindex = java.lang.Math.floorMod(rowIndex + 1, mazeMap.getHeight());
+			columnindex = columnIndex;
+		}
+		
+		if (direction == Direction.UP) {
+			rowindex = java.lang.Math.floorMod(rowIndex - 1, mazeMap.getHeight());
+			columnindex = columnIndex;
+		}
+		
+		
+		return new Square(mazeMap,rowindex, columnindex);
+		
 	}
 
 	/**

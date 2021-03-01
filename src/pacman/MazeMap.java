@@ -49,11 +49,11 @@ public class MazeMap {
 	 */
 	public boolean isPassable(int rowIndex, int columnIndex) { 
 		
-		if(rowIndex > width)
+		if(rowIndex >= width)
 			throw new IllegalArgumentException("row index is greater than width");
 		if(rowIndex < 0)
 			throw new IllegalArgumentException("row index is less than zero");
-		if(columnIndex > height)
+		if(columnIndex >= height)
 			throw new IllegalArgumentException("column index is greater than height");
 		if(columnIndex < 0)
 			throw new IllegalArgumentException("column index is smaller than zero");
