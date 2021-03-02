@@ -51,29 +51,19 @@ public class Square {
 	 */
 	// No formal documentation required
 	public Square getNeighbor(Direction direction) {
-		// Implementation hint: use method java.lang.Math.floorMod.
-		if (direction == Direction.RIGHT) {
-			rowindex = rowIndex;
-			columnindex = java.lang.Math.floorMod(columnIndex + 1, mazeMap.getWidth());
+		
+		switch (direction) {
+		case RIGHT: 
+			return new Square(mazeMap,rowIndex, java.lang.Math.floorMod(columnIndex + 1, mazeMap.getWidth()));
+		case LEFT: 
+			return new Square(mazeMap,rowIndex, java.lang.Math.floorMod(columnIndex + 1, mazeMap.getWidth()));
+		case UP: 
+			return new Square(mazeMap,java.lang.Math.floorMod(rowIndex - 1, mazeMap.getHeight()), columnIndex);
+		case DOWN: 
+			return new Square(mazeMap,java.lang.Math.floorMod(rowIndex - 1, mazeMap.getHeight()), columnIndex);
+		default:
+			return this;
 		}
-		if (direction == Direction.LEFT) {
-			rowindex = rowIndex;
-			columnindex = java.lang.Math.floorMod(columnIndex - 1, mazeMap.getWidth());
-		}
-		
-		if (direction == Direction.DOWN) {
-			rowindex = java.lang.Math.floorMod(rowIndex + 1, mazeMap.getHeight());
-			columnindex = columnIndex;
-		}
-		
-		if (direction == Direction.UP) {
-			rowindex = java.lang.Math.floorMod(rowIndex - 1, mazeMap.getHeight());
-			columnindex = columnIndex;
-		}
-		
-		
-		return new Square(mazeMap,rowindex, columnindex);
-		
 	}
 
 	/**
