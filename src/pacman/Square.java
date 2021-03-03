@@ -71,7 +71,7 @@ public class Square {
 	 */
 	// No formal documentation required
 	public boolean canMove(Direction direction) {
-		throw new RuntimeException("Not yet implemented");
+		return getNeighbor(direction).isPassable();
 	}
 
 	/**
@@ -79,15 +79,25 @@ public class Square {
 	 * The returned array shall have no null elements and shall have no duplicates.
 	 */
 	// No formal documentation required
+	
+	//optimalisatie doen
 	public Direction[] getPassableDirectionsExcept(Direction excludedDirection) {
-		throw new RuntimeException("Not yet implemented");
+		Direction passabledirections[] = new Direction[] {Direction.RIGHT, Direction.DOWN, Direction.LEFT, Direction.UP};
+		for( Direction direction : Direction.values()) {
+			if (direction != excludedDirection ) {
+				if (canMove(direction)){
+					
+				}
+			}
+		}
+			
 	}
 	
 	/**
 	 * Returns whether the given square refers to the same {@code MazeMap} object and has the same row and column index as this square.  
 	 */
 	public boolean equals(Square other) {
-		throw new RuntimeException("Not yet implemented");
+		return this.mazeMap == other.getMazeMap() && this.columnIndex == other.getColumnIndex() && this.rowIndex == other.getRowIndex();
 	}
 	
 }
