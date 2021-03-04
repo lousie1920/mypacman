@@ -56,6 +56,7 @@ class MyPackmanTest {
 		MazeMap myMazeMap = new MazeMap(1,2, myPassable1 );
 		Square mySquare = Square.of(myMazeMap, 0, 0);
 		Square neighborSquare;
+		Direction[] myPassableDirections;
 				
 		//Constructor tests
 		assertEquals(mySquare.isPassable(),myMazeMap.isPassable(0,0));
@@ -65,7 +66,13 @@ class MyPackmanTest {
 				
 		//getneighbor test 
 		neighborSquare = mySquare.getNeighbor(Direction.LEFT);
+		System.out.print("neighborSquare " + neighborSquare.getRowIndex() + "," + neighborSquare.getColumnIndex() + "\n");
 		assertEquals(neighborSquare.getColumnIndex(),mySquare.getColumnIndex());
+		
+		//getPassableDirectionsExcept
+		
+		myPassableDirections = mySquare.getPassableDirectionsExcept(Direction.UP);
+		System.out.print("myPassableDirections " + myPassableDirections[0] );
 		
 	}
 

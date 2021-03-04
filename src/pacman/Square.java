@@ -1,6 +1,8 @@
 package pacman;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import pacman.MazeMap;
 
@@ -10,35 +12,77 @@ import pacman.MazeMap;
  */
 public class Square {
 	
+	/**
+	 * @invar | 0 <= rowIndex
+	 * @invar | 0 <= columnIndex
+	 */
+	
 	private int rowIndex;
 	
 	private int columnIndex;
 	
 	private MazeMap mazeMap;
 	
+	/**
+	 * 
+	 * @throws IllegalArgumentException | rowIndex < 0
+	 * @throws IllegalArgumentException | columnIndex <0
+	 * @throws IllegalArgumentException | rowIndex >= mazemap.getHeight()
+	 * @throws IllegalArgumentException | columnIndex>= mazemap.getHeight()
+	 * 
+	 */
+	
+	
 	private Square(MazeMap mazemap, int rowIndex, int columnIndex) {
+		
+		if(rowIndex < 0)
+			throw new IllegalArgumentException("rowIndex is less than 0");
+		if(columnIndex <0)
+			throw new IllegalArgumentException("columnIndex is less than 0");
+		if(rowIndex >= mazemap.getHeight())
+			throw new IllegalArgumentException("rowIndex is greater than height mazemap");
+		if(columnIndex>= mazemap.getHeight())
+			throw new IllegalArgumentException("columnIndex is greater than width mazemap");
+	
 		this.mazeMap = mazemap;
 		this.rowIndex = rowIndex;
 		this.columnIndex = columnIndex;
 	}
 	
+	/**
+	 * 
+	 * @basic
+	 */
 	
 	public MazeMap getMazeMap() { 
 		return mazeMap;
 	}
 	
+	/**
+	 * 
+	 * @basic
+	 */
+	
 	public int getRowIndex() { 
 		return rowIndex;
 	}
 	
+	/**
+	 * 
+	 * @basic
+	 */
 	
 	public int getColumnIndex() { 
 		return columnIndex;
 	}
+	/**
+	 * 
+	 */
 	
 	public boolean isPassable() { 
 		return mazeMap.isPassable(rowIndex,columnIndex);
 	}
+	
 	
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
 		Square square = new Square(mazeMap, rowIndex, columnIndex);
@@ -80,17 +124,23 @@ public class Square {
 	 */
 	// No formal documentation required
 	
-	//optimalisatie doen
 	public Direction[] getPassableDirectionsExcept(Direction excludedDirection) {
-		Direction passabledirections[] = new Direction[] {Direction.RIGHT, Direction.DOWN, Direction.LEFT, Direction.UP};
+		//Direction passabledirections[] = new Direction[] {Direction.RIGHT, Direction.DOWN, Direction.LEFT, Direction.UP};
+	
+		List<Direction> passables = new  ArrayList<Direction>();
+		
 		for( Direction direction : Direction.values()) {
 			if (direction != excludedDirection ) {
 				if (canMove(direction)){
-					
+					passables.add(direction);
 				}
 			}
 		}
-			
+		
+		Direction[] passabledirections = new Direction[passables.size()]; 
+		passabledirections = passables.toArray(passabledirections);
+		
+	return passabledirections;
 	}
 	
 	/**
