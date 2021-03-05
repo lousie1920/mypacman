@@ -13,53 +13,39 @@ import pacman.MazeMap;
 public class Square {
 	
 	/**
-	 * @invar | 0 <= rowIndex
-	 * @invar | 0 <= columnIndex
+	 * @invar | 0 <= rowIndex && rowIndex < mazeMap.getHeight()
+	 * @invar | 0 <= columnIndex && columnIndex < mazeMap.getWidth()
+	 * 
 	 */
 	
 	private int rowIndex;
 	
 	private int columnIndex;
 	
+	/** @representationObject */
+	
 	private MazeMap mazeMap;
 	
-	/**
-	 * 
-	 * @throws IllegalArgumentException | rowIndex < 0
-	 * @throws IllegalArgumentException | columnIndex <0
-	 * @throws IllegalArgumentException | rowIndex >= mazemap.getHeight()
-	 * @throws IllegalArgumentException | columnIndex>= mazemap.getHeight()
-	 * 
-	 */
+
 	
+	private Square(MazeMap mazeMap, int rowIndex, int columnIndex) {
 	
-	private Square(MazeMap mazemap, int rowIndex, int columnIndex) {
-		
-		if(rowIndex < 0)
-			throw new IllegalArgumentException("rowIndex is less than 0");
-		if(columnIndex <0)
-			throw new IllegalArgumentException("columnIndex is less than 0");
-		if(rowIndex >= mazemap.getHeight())
-			throw new IllegalArgumentException("rowIndex is greater than height mazemap");
-		if(columnIndex>= mazemap.getHeight())
-			throw new IllegalArgumentException("columnIndex is greater than width mazemap");
-	
-		this.mazeMap = mazemap;
+		this.mazeMap = mazeMap;
 		this.rowIndex = rowIndex;
 		this.columnIndex = columnIndex;
 	}
 	
 	/**
-	 * 
 	 * @basic
+	 * @post | result != null
 	 */
+	
 	
 	public MazeMap getMazeMap() { 
 		return mazeMap;
 	}
 	
 	/**
-	 * 
 	 * @basic
 	 */
 	
@@ -68,24 +54,53 @@ public class Square {
 	}
 	
 	/**
-	 * 
 	 * @basic
 	 */
 	
 	public int getColumnIndex() { 
 		return columnIndex;
 	}
+	
 	/**
 	 * 
 	 */
+	
+	//DOCUMENTATIE!
 	
 	public boolean isPassable() { 
 		return mazeMap.isPassable(rowIndex,columnIndex);
 	}
 	
+	/**
+	 * 
+	 * @throws IllegalArgumentException | rowIndex < 0
+	 * @throws IllegalArgumentException | columnIndex <0
+	 * @throws IllegalArgumentException | rowIndex >= mazemap.getHeight()
+	 * @throws IllegalArgumentException | columnIndex>= mazemap.getHeight()
+	 * 
+	 * 
+	 * @post | getRowIndex() == rowIndex
+	 * @post | getColumnIndex() == columnIndex
+	 * @post | getMazeMap() == mazeMap
+	 * 
+	 * 
+	 */
 	
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
+		
+		if(rowIndex < 0)
+			throw new IllegalArgumentException("rowIndex is less than 0");
+		if(columnIndex <0)
+			throw new IllegalArgumentException("columnIndex is less than 0");
+		if(rowIndex >= mazeMap.getHeight())
+			throw new IllegalArgumentException("rowIndex is greater than height mazemap");
+		if(columnIndex>= mazeMap.getHeight())
+			throw new IllegalArgumentException("columnIndex is greater than width mazemap");
+		if(mazeMap == null)
+			throw new IllegalArgumentException("mazemap is null");
+		
 		Square square = new Square(mazeMap, rowIndex, columnIndex);
+		
 		return square;
 	}
 	
@@ -100,11 +115,11 @@ public class Square {
 		case RIGHT: 
 			return new Square(mazeMap,rowIndex, java.lang.Math.floorMod(columnIndex + 1, mazeMap.getWidth()));
 		case LEFT: 
-			return new Square(mazeMap,rowIndex, java.lang.Math.floorMod(columnIndex + 1, mazeMap.getWidth()));
+			return new Square(mazeMap,rowIndex, java.lang.Math.floorMod(columnIndex - 1, mazeMap.getWidth()));
 		case UP: 
 			return new Square(mazeMap,java.lang.Math.floorMod(rowIndex - 1, mazeMap.getHeight()), columnIndex);
 		case DOWN: 
-			return new Square(mazeMap,java.lang.Math.floorMod(rowIndex - 1, mazeMap.getHeight()), columnIndex);
+			return new Square(mazeMap,java.lang.Math.floorMod(rowIndex + 1, mazeMap.getHeight()), columnIndex);
 		default:
 			return this;
 		}
@@ -125,7 +140,6 @@ public class Square {
 	// No formal documentation required
 	
 	public Direction[] getPassableDirectionsExcept(Direction excludedDirection) {
-		//Direction passabledirections[] = new Direction[] {Direction.RIGHT, Direction.DOWN, Direction.LEFT, Direction.UP};
 	
 		List<Direction> passables = new  ArrayList<Direction>();
 		

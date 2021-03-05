@@ -28,12 +28,14 @@ public class MazeMap {
 	/**
 	 * Returns the width (i.e. the number of columns) of this maze map.
 	 * @basic
+	 * @post | result >= 1
 	 */
 	public int getWidth() {return width;}
 	
 	/**
 	 * Returns the height (i.e. the number of rows) of this maze map.
 	 * @basic
+	 * @post | result >= 1
 	 */
 	public int getHeight() { return height;}
 	
@@ -41,12 +43,15 @@ public class MazeMap {
 	 * Returns whether the square in this maze at row index {@code row} and column index {@code column} is passable.
 	 * The square in the top-left corner of the maze has row index 0 and column index 0.
 	 * 
-	 * @throws IllegalArgumentException | rowIndex > getWidth()
+	 * @throws IllegalArgumentException | rowIndex >= getHeight()
 	 * @throws IllegalArgumentException | rowIndex < 0
-	 * @throws IllegalArgumentException | columnIndex > getHeight()
+	 * @throws IllegalArgumentException | columnIndex >= getWidth()
 	 * @throws IllegalArgumentException | columnIndex < 0
 	 * 
 	 */
+	
+	// POST CONDITIES TOEVOEGEN
+	
 	public boolean isPassable(int rowIndex, int columnIndex) { 
 		
 		if(rowIndex >= height)
@@ -76,7 +81,8 @@ public class MazeMap {
 	 * 
 	 * @post | getWidth() == width
 	 * @post | getHeight() == height
-	 * @post | IntStream.range(0, getHeight()).allMatch(rowIndex -> IntStream.range(0, getWidth()).allMatch(columnIndex -> isPassable(rowIndex,columnIndex) == passable[ rowIndex*width + columnIndex ]))	
+	 * @post | IntStream.range(0, getHeight()).allMatch(rowIndex -> IntStream.range(0, getWidth()).allMatch(columnIndex 
+	 * 		 | -> isPassable(rowIndex,columnIndex) == passable[ rowIndex*width + columnIndex ]))	
 	 * 
 	 */
 	
