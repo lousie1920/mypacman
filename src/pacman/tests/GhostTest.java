@@ -21,22 +21,7 @@ class GhostTest {
 		
 		// Constructor Tests
 
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(null,Direction.RIGHT);});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, 1, 1),null);});
-		 
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, 3, 0),Direction.RIGHT);});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, 0, 2),Direction.RIGHT);});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, -1, 0),Direction.RIGHT);});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, 0, -2),Direction.RIGHT);});
-		 
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, 1, 0),Direction.RIGHT);});
-		 
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, 1, 1),Direction.LEFT);});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, 1, 1),Direction.RIGHT);});
-		 
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, 0, 0),Direction.UP);});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> { new Ghost(Square.of(mazemap, 0, 0),Direction.DOWN);});
-		
+	
 		 Square square = Square.of(mazemap, 0, 1);
 		 Direction direction = Direction.DOWN;
 		 Ghost ghostValid = new Ghost(square,direction);
@@ -55,12 +40,7 @@ class GhostTest {
 		 
 		 //setSquare Test
 		 
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> {ghostValid.setSquare(Square.of(mazemap, 1, 0));});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> {ghostValid.setSquare(null);});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> {ghostValid.setSquare(Square.of(mazemap, -2, 0));});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> {ghostValid.setSquare(Square.of(mazemap, 5, 0));});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> {ghostValid.setSquare(Square.of(mazemap, 0, -2));});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> {ghostValid.setSquare(Square.of(mazemap, 1, 2));});
+		 
 		 
 		 square = Square.of(mazemap, 1, 1);
 		 ghostValid.setSquare(square);
@@ -69,10 +49,7 @@ class GhostTest {
 		 
 		 // setDirections Tests
 		 
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> {ghostValid.setDirection(null);});
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> {ghostValid.setDirection(Direction.RIGHT);});
-
-		 Assertions.assertThrows(IllegalArgumentException.class, () -> {ghostValid.setDirection(Direction.LEFT);});
+		
 		 
 		 square = Square.of(mazemap, 0, 1);
 		 ghostValid.setSquare(square);

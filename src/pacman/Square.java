@@ -15,7 +15,6 @@ public class Square {
 	/**
 	 * @invar | 0 <= rowIndex && rowIndex < mazeMap.getHeight()
 	 * @invar | 0 <= columnIndex && columnIndex < mazeMap.getWidth()
-	 * 
 	 */
 	
 	private int rowIndex;
@@ -37,7 +36,6 @@ public class Square {
 	
 	/**
 	 * @basic
-	 * @post | result != null
 	 */
 	
 	
@@ -62,7 +60,6 @@ public class Square {
 	}
 	
 	/**
-	 * 
 	 * @post | result = getMazeMap().isPassable(getRowIndex(),getColumnIndex())
 	 */
 	
@@ -97,8 +94,7 @@ public class Square {
 			throw new IllegalArgumentException("rowIndex is greater than height mazemap");
 		if(columnIndex >= mazeMap.getWidth())
 			throw new IllegalArgumentException("columnIndex is greater than width mazemap");
-		if(mazeMap == null)
-			throw new IllegalArgumentException("mazemap is null");
+
 		
 		Square square = new Square(mazeMap, rowIndex, columnIndex);
 		

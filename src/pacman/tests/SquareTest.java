@@ -49,12 +49,7 @@ class SquareTest {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> { Square.of(myMazeMap, 0, -1);});
 		Assertions.assertThrows(IllegalArgumentException.class, () -> { Square.of(myMazeMap, 7, 0);});
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {Square.of(myMazeMap, 0, 4);});
-		
-		/* TBD does not work this way
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Square.of(null, 4, 2);
-		});
-		*/
+	
 		
 		// isPassable tests
 			
@@ -120,6 +115,8 @@ class SquareTest {
 		System.out.print("neighborSquare " + neighborSquare.getRowIndex() + "," + neighborSquare.getColumnIndex() + "\n");
 		assertEquals(neighborSquare.getColumnIndex(),myCornerSquare.getColumnIndex());
 		assertEquals(neighborSquare.getRowIndex(),1);
+		
+
 		
 		// canMove test
 		// corner Square
