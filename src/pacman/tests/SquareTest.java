@@ -12,10 +12,10 @@ import pacman.Square;
 class SquareTest {
 
 	@Test
-		void testSquare() {
+		void test() {
 		
 		//Square tests 
-		System.out.print("Running testSquare\n");
+		System.out.print("Running SquareTest\n");
 		
 		/*Test MazeMap looks like : 
 		 *      0 1 2 3 
@@ -28,7 +28,7 @@ class SquareTest {
 		 *  6         x
 		*/
 		
-		boolean[] myPassable = new boolean[] {false,true,false,true,true,true,false,true,false,true,true,true,false,true,false,true,true,true,true,false,false,false,true,false,true,true,true,false};
+		boolean[] myPassable = new boolean[] {false,true,false,true, true,true,false,true, false,true,true,true, false,true,false,true, true,true,true,false, false,false,true,false, true,true,true,false};
 		MazeMap myMazeMap = new MazeMap(4,7, myPassable );
 		MazeMap mySecondMazeMap = new MazeMap(4,7, myPassable );
 		Square myCenterSquare = Square.of(myMazeMap, 4, 2);
@@ -42,20 +42,13 @@ class SquareTest {
 		assertEquals(myCenterSquare.isPassable(),myMazeMap.isPassable(4,2));
 		assertEquals(myCenterSquare.getRowIndex(),4);
 		assertEquals(myCenterSquare.getColumnIndex(),2);
+		assertEquals(myCenterSquare.getMazeMap(),myMazeMap);
 		
 		//exception tests for constructor
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Square.of(myMazeMap, -1, 0);
-		});
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Square.of(myMazeMap, 7, 0);
-		});
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Square.of(myMazeMap, 0, -1);
-		});
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Square.of(myMazeMap, 0, 4);
-		});
+		Assertions.assertThrows(IllegalArgumentException.class, () -> { Square.of(myMazeMap, -1, 0);});
+		Assertions.assertThrows(IllegalArgumentException.class, () -> { Square.of(myMazeMap, 0, -1);});
+		Assertions.assertThrows(IllegalArgumentException.class, () -> { Square.of(myMazeMap, 7, 0);});
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {Square.of(myMazeMap, 0, 4);});
 		
 		/* TBD does not work this way
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
